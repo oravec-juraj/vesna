@@ -1,0 +1,34 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.sliders{
+    font-family: "Roboto", sans-serif;
+}
+/*Header*/
+.form{
+  position: center;
+  z-index: 1;
+  background: #FFFFFF;
+  margin: 0 auto 0;
+  padding:0;
+  text-align: center;
+  max-width: 360px;
+  min-width: 36px;   
+  
+}
+#image{
+    padding: 80px;
+    background: url("../image/background.jpg");
+    max-height: 250px;
+    background-size: cover;
+}
+.logo{
+    position: center;
+    max-width: 270px; 
+    min-width: 27px;
+}
+
+/*Navbar*/
+
+#menu{
+ background-color: #00a86b;
+}
+/*Slider*/
