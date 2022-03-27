@@ -55,85 +55,49 @@
             </div>
         </nav>
     </div>
-    <!-- numbers & text & sliders -->
-    <div class="container">
-        <table class="table table-borderless">
-            <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td><p>Tempreture top</p></td>
-                    <td></td>
-                    <td><p>Light</p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                  <th scope="row"></th>
-                  <td><input type="range" min="1" max="255" value="50" class="slider" id="slidertop" oninput="numbertop.innerText = this.value"></td>
-                  <td><p id="numbertop">10</p></td>
-                  <td><input type="range" min="1" max="255" value="50" class="slider" id="sliderlight"oninput="numberlight.innerText = this.value"></td>
-                  <td><p id="numberlight">10</p></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td><p>Tempreture center</p></td>
-                    <td></td>
-                    <td><p>Fans</p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td><input type="range" min="1" max="255" value="50" class="slider" id="slidercenter"oninput="numbercenter.innerText = this.value"></td>
-                    <td><p id="numbercenter">10</p></td>
-                    <td><input type="range" min="1" max="255" value="50" class="slider" id="sliderfans"oninput="numberfans.innerText = this.value"></td>
-                    <td><p id="numberfans">10</p></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
+    <!--Temperature data -->
+    <div class="container text-center pt-3 pb-3">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                        <td><p>Tempreture top</p></td>
+                        </tr>
+                        <tr>
+                        <td><p>247</p></td>
+                        </tr>
+                    </tbody>   
+                </table>
+            </div>    
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                      <td><p>Tempreture center</p></td>
+                    </tr>
+                    <tr>
+                     <td><p>145</p></td>
+                    </tr>
+                </tbody>    
+            </table>
+        </div> 
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
                     <td><p>Tempreture bottom</p></td>
-                    <td></td>
-                    <td><p>Heating</p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td><input type="range" min="1" max="255" value="50" class="slider" id="sliderbottom"oninput="numberbottom.innerText = this.value"></td>
-                    <td><p id="numberbottom">10</p></td>
-                    <td><input type="range" min="1" max="255" value="50" class="slider" id="sliderheating"oninput="numberheating.innerText = this.value"></td>
-                    <td><p id="numberheating">10</p></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td><p>Door</p></td>
-                    <td></td>
-                    <td><p>Pump</p></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="door" name="door" value="yes" checked>
-                            <label class="form-check-label" for="door">Off/On</label>
-                        </div>
-                    </td>
-                    <td></td>
-                    <td><input type="range" min="1" max="255" value="50" class="slider" id="sliderpump"oninput="numberpump.innerText = this.value"></td>
-                    <td><p id="numberpump">10</p></td>
-                </tr>
-              </tbody>
-        </table>
-    </div>
-
-    <div class="container center-block col-auto text-center">
-        <div class="row justify-content-center">
-            <div class="col-2">
-                <input type="submit" class="btn btn-success" value="Submit">
-            </div>
+                    </tr>
+                    <tr>
+                    <td><p>47</p></td>
+                    </tr>
+                </tbody>    
+            </table>
         </div>
     </div>
 
-    <!-- Charts -->
-    <div class="container center-block">
+    <!-- Charts temperature-->
+    <div class="container center-block pt-3 pb-3">
         <div class="row">
             <div class="col-md-12 col-lg-4">
                 <canvas id="chtemptop"></canvas>
@@ -145,8 +109,64 @@
                 <canvas id="chtempbottom"></canvas>
             </div>
              <!-- Force next columns to break to new line -->
-             <div class="w-100 d-none d-md-block"></div>
-
+            <div class="w-100 d-none d-md-block"></div>
+        </div>
+    </div>
+    <!-- Light,fans,heating,pump data -->
+    <div class="container text-center">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-3">
+              <table class="table table-borderless">
+                  <tbody>
+                      <tr>
+                        <td><p>Light</p></td>
+                      </tr>
+                      <tr>
+                       <td><p>247</p></td>
+                      </tr>
+                  </tbody>    
+              </table>
+          </div>  
+          <div class="col-sm-12 col-md-6 col-lg-3">
+              <table class="table table-borderless">
+                  <tbody>
+                      <tr>
+                        <td><p>Fans</p></td>
+                      </tr>
+                      <tr>
+                       <td><p>230</p></td>
+                      </tr>
+                  </tbody>    
+              </table>
+          </div> 
+          <div class="col-sm-12 col-md-6 col-lg-3">
+              <table class="table table-borderless">
+                  <tbody>
+                      <tr>
+                      <td><p>Heating</p></td>
+                      </tr>
+                      <tr>
+                      <td><p>145</p></td>
+                      </tr>
+                  </tbody>    
+              </table>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                    <td><p>Pump</p></td>
+                    </tr>
+                    <tr>
+                    <td><p>47</p></td>
+                    </tr>
+                </tbody>    
+            </table>
+        </div>
+    </div>
+    <!--Charts other-->
+    <div class="container center-block pt-3 pb-3">
+        <div class="row">
             <div class="col-sm-12 col-md-6">
                 <canvas id="chlight"></canvas>
             </div>
