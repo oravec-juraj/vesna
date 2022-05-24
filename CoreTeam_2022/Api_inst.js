@@ -32,11 +32,7 @@ async function run() {
     var prop = new IotApi.PropertiesV2Api(client)
     var api = new IotApi.DevicesV2Api(client)    
     var id = '95e254c8-7421-4d0e-bcb6-4b6991c87b4f'
-    /*api.devicesV2Show(id).then(devices => {
-        console.log(devices);
-    }, error => {
-        console.log(error)
-    });*/
+    
     var prop = new IotApi.PropertiesV2Api(client)
     var id = '95e254c8-7421-4d0e-bcb6-4b6991c87b4f'; // {String} The id of the thing
     var pid = 'd6653286-1d51-49d0-83b9-0dd6bf6b54fe'; // {String} ID of a numerical property
@@ -52,7 +48,7 @@ async function run() {
         console.log(error)
     });
 }
-run();
+//run();
 
 async function send_value() {
     var client = IotApi.ApiClient.instance;
@@ -71,4 +67,21 @@ async function send_value() {
     });
 }
 
-//send_value()
+send_value()
+
+async function dashboard() {
+    var client = IotApi.ApiClient.instance;
+    // Configure OAuth2 access token for authorization: oauth2
+    var oauth2 = client.authentications['oauth2'];
+    oauth2.accessToken = await getToken();
+
+    var api = new IotApi.DashboardsV2Api()
+    var id = 'aa0190a8-9312-4a17-8842-25a1dd483860'; // {String} The id of the dashboard
+    api.dashboardsV2Show(id).then(function(data) {
+    console.log('API called successfully. Returned data: ' + data);
+    }, function(error) {
+    console.error(error);
+    });
+}
+
+//dashboard();
