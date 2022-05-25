@@ -13,9 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.template.defaulttags import url
+from django.urls import path, include
+from django.conf.urls.static import static
+
+
+from web.views.devices import ListDevices, DeviceDetail, DevicePropertyUpdate
+
+from web.views.plants import Plants
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('', DeviceDetail.as_view(), name='device-detail'),
+    path('device-update', DevicePropertyUpdate.as_view(), name='device-property-update'),
+    path('plants/', Plants.as_view(), name='plants-list'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
