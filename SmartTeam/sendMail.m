@@ -1,22 +1,3 @@
-function sendMail(message, flag)
-%SENDMAIL Send email message
-%
-%  SENDMAIL(MESSAGE) sends message specified as string from sender to receiver
-%  both specified in .env file in main directory of project.
-%  
-%  SENDMAIL(MESSAGE, FLAG) specifies also type of message, whether 
-%  it is error or notification.
-%
-arguments
-    message string
-    flag (1,1) int16 {mustBeNumeric,mustBeReal} = 0
-end
-%% Read variables from file
-env_vars = readvars('../.env','FileType','delimitedtext');
-
-senderMail = env_vars{1};
-senderPassword = env_vars{2};
-recipientMail = env_vars{3};
 
 %% Internet connection 
 setpref('Internet','SMTP_Server','smtp.gmail.com');
