@@ -1,0 +1,9 @@
+<h1>Devices</h1>
+
+<ul>
+    {% for device in devices %}
+        <li>
+        {{ device.name }} ({{ device.id }})
+        </li>
+    {% endfor %}
+</ul>
