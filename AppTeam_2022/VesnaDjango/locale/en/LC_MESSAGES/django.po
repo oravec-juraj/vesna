@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-25 10:41+0200\n"
+"PO-Revision-Date: 2022-05-24 19:48+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sk_SK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: templates/devices/data_admin.html:51 templates/devices/data_guest.html:49
+#: templates/devices/detail.html:49 templates/devices/detail.html:112
+#: templates/devices/list_plants.html:50 templates/devices/list_plants.html:114
+msgid "Plants"
+msgstr ""
+
+#: templates/devices/detail.html:16
+msgid "Document"
+msgstr ""
+
+#: templates/devices/detail.html:46 templates/devices/detail.html:110
+#: templates/devices/list_plants.html:49 templates/devices/list_plants.html:112
+msgid "Home"
+msgstr ""
+
+#: templates/devices/detail.html:52 templates/devices/list_plants.html:51
+msgid "Admin"
+msgstr ""
+
+#: templates/devices/detail.html:116 templates/devices/list_plants.html:118
+msgid "Contact"
+msgstr ""
+
+#: templates/devices/detail.html:118 templates/devices/list_plants.html:120
+msgid "Principal investigator"
+msgstr ""
+
+#: templates/devices/detail.html:121 templates/devices/list_plants.html:123
+msgid "embedded hardware & software specialist"
+msgstr ""
+
+#: templates/devices/list_plants.html:62
+msgid "Pelargonia"
+msgstr ""
+
+#: templates/devices/list_plants.html:63 templates/devices/list_plants.html:76
+#: templates/devices/list_plants.html:89
+msgid "Temperature:"
+msgstr ""
+
+#: templates/devices/list_plants.html:64
+msgid "Summer: 20-25 °C"
+msgstr ""
+
+#: templates/devices/list_plants.html:65
+msgid "Winter: 12-15 °C"
+msgstr ""
+
+#: templates/devices/list_plants.html:66
+msgid "Watering: top"
+msgstr ""
+
+#: templates/devices/list_plants.html:67
+msgid "Summer: 2-3 times per week"
+msgstr ""
+
+#: templates/devices/list_plants.html:68
+msgid "Winter: once per 2 weeks"
+msgstr ""
+
+#: templates/devices/list_plants.html:70
+#, python-format
+msgid "<b>Humidity:</b> 30-55 %%"
+msgstr ""
+
+#: templates/devices/list_plants.html:71 templates/devices/list_plants.html:84
+msgid "Lighting:</b> >25 000 lx"
+msgstr ""
+
+#: templates/devices/list_plants.html:75
+msgid "Aloe Vera"
+msgstr ""
+
+#: templates/devices/list_plants.html:77 templates/devices/list_plants.html:90
+msgid "Summer: 22-26 °C"
+msgstr ""
+
+#: templates/devices/list_plants.html:78
+msgid "Winter: 13-15 °C"
+msgstr ""
+
+#: templates/devices/list_plants.html:79 templates/devices/list_plants.html:92
+msgid "Watering: bottom"
+msgstr ""
+
+#: templates/devices/list_plants.html:80 templates/devices/list_plants.html:93
+msgid "Summer: once per week"
+msgstr ""
+
+#: templates/devices/list_plants.html:81
+msgid "Winter: once per month"
+msgstr ""
+
+#: templates/devices/list_plants.html:83
+#, python-format
+msgid "Humidity:</b> 30-55 %%"
+msgstr ""
+
+#: templates/devices/list_plants.html:88
+msgid "Spathiphyllum"
+msgstr ""
+
+#: templates/devices/list_plants.html:91
+msgid "Winter: 18-19 °C"
+msgstr ""
+
+#: templates/devices/list_plants.html:94
+msgid "Winter: once per week"
+msgstr ""
+
+#: templates/devices/list_plants.html:96
+#, python-format
+msgid "Humidity:</b> 80 %%"
+msgstr ""
+
+#: templates/devices/list_plants.html:97
+msgid "Lighting:</b> 10 000 - 25 000 lx"
+msgstr ""
+
+#: vesna_django/settings.py:127
+msgid "German"
+msgstr ""
+
+#: vesna_django/settings.py:128
+msgid "English"
+msgstr ""
+
+#: vesna_django/settings.py:129
+msgid "Slovak"
+msgstr ""
+
+#: web/views/devices.py:61
+msgid "Measurements"
+msgstr ""
