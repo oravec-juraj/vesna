@@ -1,6 +1,5 @@
 var IotApi = require('@arduino/arduino-iot-client');
 var rp = require('request-promise');
-var x;
 
 async function getToken() {
     var options = {
@@ -48,34 +47,28 @@ async function run() {
     };
     prop.propertiesV2Timeseries(id,pid,opts).then(data => {
 
-        //console.log(data);
-        console.log("ahoj");
-        
-        
+        console.log(data);
     },error => {
         console.log(error)
     });
-
-}    
+}
 run();
 
+async function send_value() {
+    var client = IotApi.ApiClient.instance;
+    // Configure OAuth2 access token for authorization: oauth2
+    var oauth2 = client.authentications['oauth2'];
+    oauth2.accessToken = await getToken();
 
+    var val = new IotApi.PropertiesV2Api(client)
+    var id = 'aa0190a8-9312-4a17-8842-25a1dd483860'; // {String} The id of the thing
+    var pid = '0c8a7441-7894-4d36-b4ec-7df63dfebd2a';
+    var propertyValue = {'value':40}; // 0-255
+    val.propertiesV2Publish(id, pid, propertyValue).then(function() {
+        console.log('API called successfully.');
+      }, function(error) {
+        console.error(error);
+    });
+}
 
-// async function send_value() {
-//     var client = IotApi.ApiClient.instance;
-//     // Configure OAuth2 access token for authorization: oauth2
-//     var oauth2 = client.authentications['oauth2'];
-//     oauth2.accessToken = await getToken();
-
-//     var val = new IotApi.PropertiesV2Api(client)
-//     var id = 'aa0190a8-9312-4a17-8842-25a1dd483860'; // {String} The id of the thing
-//     var pid = '0c8a7441-7894-4d36-b4ec-7df63dfebd2a';
-//     var propertyValue = {'value':40}; // 0-255
-//     val.propertiesV2Publish(id, pid, propertyValue).then(function() {
-//         console.log('API called successfully.');
-//       }, function(error) {
-//         console.error(error);
-//     });
-// }
-
-// send_value()
+//send_value()
