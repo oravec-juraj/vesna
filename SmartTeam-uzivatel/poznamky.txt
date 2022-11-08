@@ -1,0 +1,30 @@
+NAVRHY
+- vsetky udaje sa budu musiet nacitavat z Cloudu
+   - nacitanie bude musiet byt robene v kazdom cykle
+    - App Team tam bude posielat z webstranky po prihlaseni admina
+      akcne zasahy, zmeny limitov parametrov, ziadene veliciny,
+      setpointy, konstanty PID regulatorov, casy ventilacii ...
+    - budeme musiet dorobit nove premenne na Cloude, kam App Team budu
+      zasielat svoje data
+    - cela Initialization okrem 'count','e_p','u_p'
+- prerobit PID regulator do tvaru diskretneho riadenia
+u(k) = (Kp + Ki*Δt + Kd/Δt) * e(k) - (Kp + 2*Kp/Δt) * e(k-1) +
+        + Kd/Δt * e(k-2) + u(k-1)
+- zapisovanie časov na Cloud
+
+STAHOVANIE VACSIEHO MNOZSTVA DAT
+
+options = reconnect;
+data = webread("https://api2.arduino.cc/iot/v2/things/" + ...
+	"{95e254c8-7421-4d0e-bcb6-4b6991c87b4f}/properties/" + ...
+	"{d6653286-1d51-49d0-83b9-0dd6bf6b54fe}/timeseries?" + ...
+	"from=2022-10-03T00:00:00Z&interval=300&to=2022-10-06T00:00:00Z", ...
+	options);
+casy = datetime(cell2mat({data.data.time}'),'InputFormat', ...
+	'yyyy-MM-dd''T''HH:mm:ssxxx', 'TimeZone','Europe/Bratislava', ...
+        'Format','yyyy-MM-dd HH:mm:ss');
+hodnoty = [data.data.value]';
+
+interval - casovy usek medzi 2 meraniami (udavany v sekundach) -
+maximalny pocet dat, ktore vie na jedno spustenie prikazu webread
+stiahnut je 1000
