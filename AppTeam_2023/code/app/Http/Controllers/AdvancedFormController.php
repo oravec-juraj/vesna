@@ -189,8 +189,8 @@ class AdvancedFormController extends Controller
         };
 
         if ($response->getStatusCode() == 200) {                                                                        // if everything went fine green alert will appear with text
-            session()->flash('success', "Parameters updated successfully!");
-            return AdvancedFormController::get_show_values_advanced();                                              // this will return view back to show last values
+            session()->flash('success', "Parameters updated successfully! Please refresh the page to see updated values.");
+            return redirect()->action([AdvancedFormController::class, 'get_show_values_advanced']);                       // this will return view back to show last values
         }
     }    
 }

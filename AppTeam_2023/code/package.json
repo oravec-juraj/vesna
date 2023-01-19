@@ -15,9 +15,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "@arduino/arduino-iot-client": "^1.4.2",
         "alpinejs": "^3.10.5",
-        "chart.js": "^3.9.1",
-        "request-promise": "^4.2.6"
+        "chart.js": "^3.9.1"
     }
 }

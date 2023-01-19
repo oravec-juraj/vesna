@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-10" >    
         @if (session()->has('success'))
-            <div class="alert alert-success" role="alert" >{!! session()->get('success') !!}</div>
+            <div class="alert alert-success" role="alert" id="timer_alert">{!! session()->get('success') !!}</div>
         @endif
         
         @if (session()->has('failure'))

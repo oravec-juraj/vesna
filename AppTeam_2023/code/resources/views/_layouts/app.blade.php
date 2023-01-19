@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="HandheldFriendly" content="true" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>VESNA</title>
 
@@ -124,13 +125,16 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-    <script src="{{asset('js/prototype.js')}}" type="text/javascript"></script>
     <script src="https://kit.fontawesome.com/5f23534714.js" crossorigin="anonymous"></script>
     <!-- Page level plugins -->
-    
-    <!-- Page level custom scripts -->
-    <!-- <script src="js/demo/chart-area-demo.js"></script>    toto nic nerobi, ci?
-         <script src="js/demo/chart-pie-demo.js"></script> -->
+    <script type="text/javascript">  // zobrazenie alertu po dobu 10s
+        $(document).ready(function(){
+            setTimeout(function(){
+                $("#timer_alert").remove();
+            }, 10000 ); 
+
+        });
+    </script>
     @yield('scripts')
 </body>
 

@@ -79,15 +79,15 @@
       <li class="form-line form-line-column form-col-7" data-type="control_number" id="id_21">
         <label class="form-label form-label-top form-label-auto" id="label_21" for="time_up"> End of daily control </label>
         <div id="cid_21" class="form-input-wide" data-layout="half"> 
-          <input type="number" id="time_up" name="time_up" data-type="input-number" class=" form-number-input disallowDecimals form-textbox" data-defaultvalue="" style="width:310px" size="310" value="" placeholder="Last value: {{$time_up_show}}" min="72000" max="86400" data-component="number" aria-labelledby="label_13" step="any" />
-          <label class="form-sub-label" for="time_up" id="sublabel_input_21" style="min-height:13px" aria-hidden="false">Time in hours</label> 
+          <input type="number" id="time_up" name="time_up" data-type="input-number" class=" form-number-input disallowDecimals form-textbox" data-defaultvalue="" style="width:310px" size="310" value="" placeholder="Last value: {{$time_up_show}}" min="20" max="24" data-component="number" aria-labelledby="label_13" step="any" />
+          <label class="form-sub-label" for="time_up" id="sublabel_input_21" style="min-height:13px" aria-hidden="false">Time in hours (Slovakia UTC+1)</label> 
         </div>
       </li>
       <li class="form-line form-line-column form-col-8" data-type="control_number" id="id_22">
         <label class="form-label form-label-top form-label-auto" id="label_22" for="time_down"> Start of daily control </label>
         <div id="cid_22" class="form-input-wide" data-layout="half"> 
-          <input type="number" id="time_down" name="time_down" data-type="input-number" class=" form-number-input disallowDecimals form-textbox" data-defaultvalue="" style="width:310px" size="310" value="" placeholder="Last value: {{$time_down_show}}" min="72000" max="86400" data-component="number" aria-labelledby="label_13" step="any" />
-          <label class="form-sub-label" for="time_down" id="sublabel_input_22" style="min-height:13px" aria-hidden="false">Time in hours</label> 
+          <input type="number" id="time_down" name="time_down" data-type="input-number" class=" form-number-input disallowDecimals form-textbox" data-defaultvalue="" style="width:310px" size="310" value="" placeholder="Last value: {{$time_down_show}}" min="6" max="24" data-component="number" aria-labelledby="label_13" step="any" />
+          <label class="form-sub-label" for="time_down" id="sublabel_input_22" style="min-height:13px" aria-hidden="false">Time in hours (Slovakia UTC+1)</label> 
         </div>
       </li>
       <li class="form-line" data-type="control_button" id="id_2">

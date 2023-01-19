@@ -15,7 +15,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call('App\Http\Controllers\EnvironmentFormController@get_show_values_environment')->everyMinute();
+        $schedule->call('App\Http\Controllers\PlantFormController@get_show_values_plant')->everyMinute();
+        $schedule->call('App\Http\Controllers\AdvancedFormController@get_show_values_advanced')->everyMinute();
     }
 
     /**

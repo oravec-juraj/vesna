@@ -268,8 +268,8 @@ class PlantFormController extends Controller
         };
 
         if ($response->getStatusCode() == 200) {                                                            // if everything went fine green alert will appear with text
-            session()->flash('success', "Plant control successfull!");
-            return PlantFormController::get_show_values_plant();                                            // this will return view back to show last values
+            session()->flash('success', "Plant control successfull! Please refresh the page to see updated values.");
+            return redirect()->action([PlantFormController::class, 'get_show_values_plant']);        // this will return view back to show last values
         }
     }
 }

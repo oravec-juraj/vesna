@@ -20,9 +20,9 @@ class UserSeeder extends Seeder
         User::create([
             'name'              => 'User',
             'surname'           => 'One', 
-            'email'             => 'user@vesna.com', 
+            'email'             => config('services.credentials.user_email'), 
             'email_verified_at' => now(),
-            'password'          => bcrypt(config('services.credentials.userp')), 
+            'password'          => bcrypt(config('services.credentials.user_pass')), 
             'remember_token'    => Str::random(10),
             'created_at'        => now(),
             'is_admin'          => 0, 
@@ -31,9 +31,9 @@ class UserSeeder extends Seeder
         User::create([
             'name'              => 'Admin',
             'surname'           => 'One',  
-            'email'             => 'admin@vesna.com', 
+            'email'             => config('services.credentials.admin_email'), 
             'email_verified_at' => now(),
-            'password'          => bcrypt(config('services.credentials.adminp')), 
+            'password'          => bcrypt(config('services.credentials.admin_pass')), 
             'remember_token'    => Str::random(10),
             'created_at'        => now(),
             'is_admin'          => 1, 

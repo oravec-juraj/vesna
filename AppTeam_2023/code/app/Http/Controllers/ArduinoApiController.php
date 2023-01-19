@@ -50,16 +50,6 @@ class ArduinoApiController extends Controller
         $desc = 1;                                      // sort datapoints from newest to oldest
 
         $pid_array = [                                  // iterable array for individual requests, array keys snakecase for dynamic blade rendering
-            'temp_bot_3h' => [
-                'pid' =>'68f17374-437c-466d-a7fc-b9b5906002b1',     // cloud property id
-                'h_minus' => 3,                                     // timeframe lower boundary in hours, subtracted from current time
-                'interval' => 30,                                   // interval between datapoints in seconds
-            ],
-            'temp_bot_48h' => [
-                'pid' =>'68f17374-437c-466d-a7fc-b9b5906002b1',
-                'h_minus' => 48,
-                'interval' => 300,
-            ],
             'temp_top_3h' => [
                 'pid' =>'61e6a028-5d0d-4ae5-9684-069fed62d784',
                 'h_minus' => 3,
@@ -67,6 +57,16 @@ class ArduinoApiController extends Controller
             ],
             'temp_top_48h' => [
                 'pid' =>'61e6a028-5d0d-4ae5-9684-069fed62d784',
+                'h_minus' => 48,
+                'interval' => 300,
+            ],
+            'temp_bot_3h' => [
+                'pid' =>'68f17374-437c-466d-a7fc-b9b5906002b1',     // cloud property id
+                'h_minus' => 3,                                     // timeframe lower boundary in hours, subtracted from current time
+                'interval' => 30,                                   // interval between datapoints in seconds
+            ],
+            'temp_bot_48h' => [
+                'pid' =>'68f17374-437c-466d-a7fc-b9b5906002b1',
                 'h_minus' => 48,
                 'interval' => 300,
             ],
@@ -148,7 +148,9 @@ class ArduinoApiController extends Controller
                 
             ]);
             
-            $current_batch[$key] = json_decode($response->getBody(),true)['last_value']; // add data as a nested array to $current_batch
+            $current_value = json_decode($response->getBody(),true)['last_value']; // add data as a nested array to $current_batch
+            $current_value_string = number_format($current_value, 1);              // floatval cant be define as decimal point after dot
+            $current_batch[$key] = floatval($current_value_string);                 // so we have to convert to string and then return back to float
         };
 
         return json_encode($current_batch);

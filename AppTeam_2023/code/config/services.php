@@ -37,7 +37,9 @@ return [
     ],
 
     'credentials' => [
-        'adminp'  => env('ADMIN_PASSWORD'),
-        'userp'   => env('USER_PASSWORD'),
+        'admin_email' => env('ADMIN_EMAIL'),
+        'admin_pass'  => env('ADMIN_PASSWORD'),
+        'user_email'  => env('USER_EMAIL'),
+        'user_pass'   => env('USER_PASSWORD'),
     ],
 ];

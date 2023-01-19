@@ -82,15 +82,15 @@
     assignCurrent = function($key, $value){
         var elem = document.getElementById($key);   {{-- attaches current data to a corresponding element --}}
         elem.textContent = $value;
-    }
+    };
 
     updateCurrent = function() {        {{-- gets current data asynchronously through controller --}}
-        $.ajax({
+        jQuery.ajax({
             url: "{{ route('current_data') }}",
             type: 'GET',
             dataType: 'json',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
                 console.log('success');
@@ -102,7 +102,7 @@
                 console.log('error');
             }
         });
-    }
+    };
     
     updateCurrent();
     setInterval(() => {

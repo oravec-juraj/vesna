@@ -40,7 +40,7 @@ class EnvironmentFormController extends Controller
         $id = 'aa0190a8-9312-4a17-8842-25a1dd483860';   // cloud thing id - Vesna_act
 
         $pid_control = EnvironmentFormController::creating_pid();           // taking pid from function above
-
+        //sleep(10);
         foreach($pid_control as $key => $row){                                  // for cycle in which we send GET method to ArduinoCloud to show last value
             
             $pid = $row;
@@ -149,7 +149,7 @@ class EnvironmentFormController extends Controller
             ],
         ]);
 
-        $id = 'f9d0897d-b142-4b48-9a45-7d25a28d4e79';   // cloud thing id - Vesna user thing
+        $id = 'aa0190a8-9312-4a17-8842-25a1dd483860';   // cloud thing id - Vesna user thing
         
         $pid_control = EnvironmentFormController::creating_pid();           // getting pid_control from first function above
         
@@ -223,14 +223,15 @@ class EnvironmentFormController extends Controller
                     'content-type' => 'application/json',
                 ],
                 'json' => [
-                    'value' => $value,
+                    'value' => intval($value),
                 ],
             ]);
         };
 
         if ($response->getStatusCode() == 200) {                        // if everything went fine green alert will appear with text
-            session()->flash('success', "Control successfull!");
-            return EnvironmentFormController::get_show_values_control();        // this will return view back to show last values
+            session()->flash('success', "Control successfull! Please refresh the page to see updated values.");
+            return redirect()->action([EnvironmentFormController::class, 'get_show_values_control']);        // this will return view back to show last values
+            //return back();
         }
     }       
 }
