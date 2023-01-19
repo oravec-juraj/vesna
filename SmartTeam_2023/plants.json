@@ -1,0 +1,157 @@
+{
+    "id1":
+    {
+        "plant":"Basil",
+        "temp_min": 18,
+        "temp_max": 25,
+        "w_day": 22.5,
+        "w_night": 19,
+        "hum_min": 90,
+        "hum_max": 95,
+        "exposure": 28800
+    },
+    
+    "id2":
+    {
+        "plant":"Parsley",
+        "temp_min": 15,
+        "temp_max": 29,
+        "w_day": 25.5,
+        "w_night": 17.5,
+        "hum_min": 50,
+        "hum_max": 95,
+        "exposure": 28800
+    },
+
+    "id3":
+    {
+        "plant":"Mint",
+        "temp_min": 13,
+        "temp_max": 24,
+        "w_day": 21,
+        "w_night": 14,
+        "hum_min": 40,
+        "hum_max": 55,
+        "exposure": 28800
+    },
+
+    "id4":
+    {
+        "plant":"Cucumber",
+        "temp_min": 18,
+        "temp_max": 28,
+        "w_day": 25,
+        "w_night": 19,
+        "hum_min": 85,
+        "hum_max": 95,
+        "exposure": 28800
+    },
+
+    "id5":
+    {
+        "plant":"Pepper",
+        "temp_min": 16,
+        "temp_max": 30,
+        "w_day": 26,
+        "w_night": 18,
+        "hum_min": 50,
+        "hum_max": 70,
+        "exposure": 36000
+    },
+
+    "id6":
+    {
+        "plant":"Tomato",
+        "temp_min": 15,
+        "temp_max": 20,
+        "w_day": 24,
+        "w_night": 17.5,
+        "hum_min": 65,
+        "hum_max": 85,
+        "exposure": 43200
+    },
+
+    "id7":
+    {
+        "plant":"Bean and pea",
+        "temp_min": 16,
+        "temp_max": 28,
+        "w_day": 24.5,
+        "w_night": 17,
+        "hum_min": 60,
+        "hum_max": 75,
+        "exposure": 43200
+    },
+
+    "id8":
+    {
+        "plant":"Lettuce",
+        "temp_min": 13,
+        "temp_max": 22,
+        "w_day": 18.5,
+        "w_night": 14,
+        "hum_min": 50,
+        "hum_max": 70,
+        "exposure": 28800
+    },
+
+    "id9":
+    {
+        "plant":"Cauliflower",
+        "temp_min": 11,
+        "temp_max": 19,
+        "w_day": 17.5,
+        "w_night": 13,
+        "hum_min": 80,
+        "hum_max": 95,
+        "exposure": 28800
+    },
+
+    "id10":
+    {
+        "plant":"Eggplant",
+        "temp_min": 15,
+        "temp_max": 26,
+        "w_day": 24,
+        "w_night": 16.5,
+        "hum_min": 50,
+        "hum_max": 65,
+        "exposure": 43200
+    },
+
+    "id11":
+    {
+        "plant":"Head cabbage",
+        "temp_min": 15,
+        "temp_max": 21,
+        "w_day": 19.5,
+        "w_night": 16.5,
+        "hum_min": 60,
+        "hum_max": 90,
+        "exposure": 28800
+    },
+
+    "id12":
+    {
+        "plant":"Broccoli",
+        "temp_min": 13,
+        "temp_max": 21,
+        "w_day": 19.5,
+        "w_night": 15.5,
+        "hum_min": 80,
+        "hum_max": 95,
+        "exposure": 28800
+    },
+
+    "id13":
+    {
+        "plant":"Strawberry",
+        "temp_min": 13,
+        "temp_max": 26,
+        "w_day": 23,
+        "w_night": 14.5,
+        "hum_min": 60,
+        "hum_max": 75,
+        "exposure": 36000
+    }
+ }

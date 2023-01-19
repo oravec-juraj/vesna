@@ -1,0 +1,19 @@
+
+# Specified files
+credentials.txt
+credentials2.txt
+identifiers/id_value.txt
+identifiers/pid_value.txt
+
+# Python files
+*.ipynb
+
+# PDF documents
+*.pdf
+
+# Compressed files
+*.zip
+*.rar
+
+# MATLAB autosave files
+*.asv
