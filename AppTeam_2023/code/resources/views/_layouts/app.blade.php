@@ -50,35 +50,46 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-                            @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ Auth::user()->user_full_name }} </span>
-                                <img class="img-profile"
-                                    src="{{asset('img/user.svg')}}">
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('app.login') }}</a>
+                            </li>
+                        @endif
+                    @else
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ Auth::user()->user_full_name }} </span>
+                        <img class="img-profile"
+                            src="{{asset('img/user.svg')}}">
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{ __('app.logout') }}
                             </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                    @endguest                      
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            @endguest                      
             </li>
+
+                <li class="nav-item dropdown no-arrow">
+                    <a a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ __('app.language') }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{{ route('language', 'en') }}"><img src="{{ asset('img/en.png') }}" width="30" height="20"> EN</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('language', 'sk') }}"><img src="{{ asset('img/sk.png') }}" width="30" height="20"> SK</a>
+                    </div>
+                </li>
             </ul>
 
         </nav>

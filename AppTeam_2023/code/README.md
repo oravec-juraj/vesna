@@ -8,6 +8,7 @@
 - [Camera](#Camera)
 - [Livestream](#Livestream)
 - [Camera](#Camera)
+- [Languages Supported](#Languages-Supported)
 ------------
 ## REQUIREMENTS
 Laravel web page requires the following to run:
@@ -220,7 +221,10 @@ The form is used to select a plant, where the values are sent as soon as the pla
 |Temperature setpoint during the night| w_night | w_night |18 | 18| 35 | Float |
 |Minimum recommended humidity | hum_min | hum_min |48 | 48| 100 | Float |
 |Maximum recommended humidity | hum_max | hum_max|52 | 52| 100 | Float |
-|End of daily control | time_up | time_up|72000 | 20*3600| 24*3600 | Time |
-|Start of daily control | time_down | time_down|21600 | 6*3600| 24*3600 | Time |
+|End of daily control | time_up | time_up|72000 | 72000| 86400 | Time |
+|Start of daily control | time_down | time_down|21600 | 21600| 86400 | Time |
 
 In the root folder there are files like **Plants.pdf**. We studied the optimal conditions for each plant and then entered them into a file with the necessary temperature and humidity values with pH for each plant. We then transferred this data into **plants.json** which contains this data in json format.
+
+## Languages Supported
+There are a number of expressions left in English since English is the main language of the Vesna site. There is a controller for the languages. In the root folder there is a lang folder where you will find the English and Slovak versions. There is a file corresponding to each tab. There are expressions within each blade such as "{{__('plant.caption')}}", which speaks in lang/_according to the currently selected language_ en/plant is the variable caption from which the caption can be retrieved instead.

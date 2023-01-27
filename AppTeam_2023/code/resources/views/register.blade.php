@@ -8,14 +8,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registration of new users') }}</div>
+                <div class="card-header">{{ __('register.registration') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">Name<span style="color:red;">*</span></label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{__('register.name')}}<span style="color:red;">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="surname" class="col-md-4 col-form-label text-md-end">Surname<span style="color:red;">*</span></label>
+                            <label for="surname" class="col-md-4 col-form-label text-md-end">{{__('register.surname')}}<span style="color:red;">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
@@ -45,7 +45,7 @@
                         
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}<span style="color:red;">*</span></label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('register.email_address') }}<span style="color:red;">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -60,7 +60,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}<span style="color:red;">*</span></label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('register.password') }}<span style="color:red;">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}<span style="color:red;">*</span></label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('register.confirm_password') }}<span style="color:red;">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -86,7 +86,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('register.register') }}
                                 </button>
                             </div>
                         </div>

@@ -25,7 +25,7 @@ Home
 <body>
 <div class="center">
     <h1>VESNA</h1>
-    <p>The greenhouse you didn't know you needed.</p>
+    <p>{{__('index.caption')}}</p>
 </div>
         
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App;
 
 class HomeController extends Controller
 {
@@ -25,4 +27,5 @@ class HomeController extends Controller
     {
         return view('index');
     }
+
 }

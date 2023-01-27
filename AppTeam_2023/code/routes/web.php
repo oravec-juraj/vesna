@@ -5,6 +5,7 @@ use App\Http\Controllers\ArduinoApiController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LanguageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,8 @@ Route::get('/statistics', function () {
 Route::get('/livestream', function () {
     return view('livestream');
 })->name('livestream');
+
+Route::get('language/{locale}', [App\Http\Controllers\LanguageController::class, 'language'])->name('language');
 
 Auth::routes();
 

@@ -16,16 +16,16 @@
     <li class="nav-item active">
         <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapsePagestoControl" aria-expanded="true" aria-controls="collapsePagestoControl">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Greenhouse Cotrol</span>
+            <span>{{__('navbar.greenhousecontrol')}}</span>
         </a>
         <div id="collapsePagestoControl" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('control_index')}}"><span>Control of Greenhouse</span></a>
-                <h6 class="collapse-header">Control Screens:</h6>
-                <a class="collapse-item" href="{{route('control_environment')}}"><span>Environment Monitoring</span></a>
-                <a class="collapse-item" href="{{route('control_plant')}}"><span>Choice of Plant</span></a>
+                <a class="collapse-item" href="{{route('control_index')}}"><span>{{__('navbar.greenhousecontroldrop')}}</span></a>
+                <h6 class="collapse-header">{{__('navbar.controlscreensdrop')}}:</h6>
+                <a class="collapse-item" href="{{route('control_environment')}}"><span>{{__('navbar.controlenvironment')}}</span></a>
+                <a class="collapse-item" href="{{route('control_plant')}}"><span>{{__('navbar.controlplant')}}</span></a>
                 @if(Auth::user()->is_admin)
-                <a class="collapse-item" href="{{route('control_advanced')}}"><span>Advanced Control</span></a>
+                <a class="collapse-item" href="{{route('control_advanced')}}"><span>{{__('navbar.controladvanced')}}</span></a>
                 @endif
             </div>
         </div>
@@ -36,32 +36,32 @@
         <li class="nav-item active">
         <a class="nav-link" href="{{route('aboutproject')}}">
             <i class="fas fa-fw fa-leaf"></i>
-            <span>About Project</span></a>
+            <span>{{__('navbar.about')}}</span></a>
     </li>
 
     <!-- Nav Item - Statistics -->
     <li class="nav-item active">
         <a class="nav-link" href="{{route('chart')}}">
             <i class="fas fa-fw fa-chart-line"></i>
-            <span>Statistics</span></a>
+            <span>{{__('navbar.statistics')}}</span></a>
     </li>
 
     <!-- Nav Item - Livestream -->
     <li class="nav-item active">
     <a class="nav-link" href="{{route('livestream')}}">
         <i class="fas fa-fw fa-video"></i>
-        <span>Livestream</span></a>
+        <span>{{__('navbar.livestream')}}</span></a>
     </li>
     @auth
         <li class="nav-item active">
         <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseGallery" aria-expanded="true" aria-controls="collapseGallery">
             <i class="fas fa-fw fa-images"></i>
-            <span>Gallery</span>
+            <span>{{__('navbar.gallery')}}</span>
         </a>
         <div id="collapseGallery" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{route('gallery')}}"><span>Gallery</span></a>
-                <a class="collapse-item" href="{{route('timelapse')}}"><span>Timelapse</span></a>
+                <a class="collapse-item" href="{{route('gallery')}}"><span>{{__('navbar.gallery')}}</span></a>
+                <a class="collapse-item" href="{{route('timelapse')}}"><span>{{__('navbar.timelapse')}}</span></a>
             </div>
         </div>
     </li>
@@ -73,7 +73,7 @@
     <li class="nav-item active">
     <a class="nav-link" href="{{route('register')}}">
         <i class="fas fa-fw fa-user"></i>
-        <span>Registration</span></a>
+        <span>{{__('navbar.registration')}}</span></a>
     </li>  
     @endif
     @endauth
