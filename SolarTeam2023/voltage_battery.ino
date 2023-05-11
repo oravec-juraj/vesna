@@ -22,15 +22,19 @@ void loop() {
   volt_value = Sum/100;
   
   //int volt_value = analogRead(voltage);
-  float u = float(volt_value)*float(volt_value)*float(volt_value)*k[0] + float(volt_value)*float(volt_value)*k[1] + float(volt_value)*k[2]+k[3];
+  float u = float(volt_value) * float(volt_value) * float(volt_value) * k[0] + float(volt_value) * float(volt_value) * k[1] + float(volt_value) * k[2] + k[3];
+  int v = u * 100;
+  float voltage = v*0.01;
+  
   Serial.print("voltage: ");
-  Serial.println(u);
+  Serial.println(voltage);
   //delay(500);
-  //int batt = 100 - (max_voltage - Average)/1.82*100;
+  //int batt = 100 - (max_voltage - voltage)/1.82*100;
   if(u > 2)
   {
     batt = constrain(u, 11.34, 12.5);
-    batt = map(batt, 11.34 ,12.5 ,0.0 ,100.0);
+    //battery = map(battery, 11.34, 12.5, 0.0, 100.0);
+    battery = (battery - 11.34) * (100.0 - 0.0) / (12.5 - 11.34) + 0.0;
     Serial.print("batt: ");
     Serial.println(batt);
   }
