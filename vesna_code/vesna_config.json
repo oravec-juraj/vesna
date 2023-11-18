@@ -1,0 +1,56 @@
+{
+    "config": {
+        "cloud": {
+            "URL2things": "https://api2.arduino.cc/iot/v2/things/",
+            "properties": "/properties/",
+            "publish": "/publish",
+            "timeseries": "/timeseries?",
+            "interval": "interval=",
+            "start": "&from=",
+            "end": "&to="
+        },
+        "data": {
+            "creds": "vesna_email.json",
+            "ids": "vesna_data_ids.json"
+        }
+    },
+    "communication": {
+        "url": "",
+        "login": "",
+        "password": "",
+        "status": "none",
+        "flag": 0,
+        "established": "never",
+        "lastUpdate": "never",
+        "reconnect": 0,
+        "options": "none"
+    },
+    "data": "",
+    "mail": {
+        "setup": {
+            "prefs": {
+                "internet": "Internet",
+                "email": "E_mail",
+                "server": "SMTP_Server",
+                "gmail": "smtp.gmail.com",
+                "username": "SMTP_Username",
+                "password": "SMTP_Password"
+            },
+            "props": {
+                "authName": "mail.smtp.auth",
+                "authValue": "true",
+                "className": "mail.smtp.socketFactory.class",
+                "classValue": "javax.net.ssl.SSLSocketFactory",
+                "portName": "mail.smtp.socketFactory.port",
+                "portValue": "465"
+            }
+        },
+        "components": {
+            "sender": "",
+            "password": "",
+            "recipient": "",
+            "subject": "",
+            "body": ""
+        }
+    }
+}

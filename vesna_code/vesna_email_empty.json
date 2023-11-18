@@ -1,0 +1,4 @@
+{
+    "sender": "EMAIL@ADDRESS.COM",
+    "password": "HASH_SECRET_OF_EMAIL_PASSWORD"
+}

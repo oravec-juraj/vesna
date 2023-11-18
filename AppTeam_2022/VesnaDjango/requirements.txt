@@ -1,5 +1,0 @@
-Django
-arduino-iot-client
-requests-oauthlib
-python-dotenv
-pygal

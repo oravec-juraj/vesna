@@ -1,0 +1,13 @@
+{
+    "thing_id": "HASH_TO_THIS_POINTER",
+    "vars_ids": {
+        "temperature": "HASH_TO_THIS_POINTER",
+        "humidity": "HASH_TO_THIS_POINTER",
+        "light_intensity": "HASH_TO_THIS_POINTER",
+        "CO2": "HASH_TO_THIS_POINTER",
+        "heater": "HASH_TO_THIS_POINTER",
+        "humidiser": "HASH_TO_THIS_POINTER",
+        "lighting": "HASH_TO_THIS_POINTER",
+        "fans": "HASH_TO_THIS_POINTER"
+    }
+}
