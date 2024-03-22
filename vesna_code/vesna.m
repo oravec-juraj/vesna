@@ -137,7 +137,7 @@ classdef vesna < handle
                 elseif contains(errors.identifier,'400')
                     % Wrong LOGIN (ID) or wrong PASWORD (SECRET)
                     obj.communication.status = "unauthorized";
-                    obj.communication.flag = -1;
+                    obj.communication.flag = -1;    
                     if obj.communication.reconnect == 0
                         error("VESNA: Connection error: Unauthorized access (login failed)!")
                     end
@@ -479,5 +479,32 @@ classdef vesna < handle
                 end
             end
         end
+
+        %% Display variables
+        %
+        % Function VARIABLES returns list of variables to be exchanged with the remote cloud service.
+        function [list_of_variables] = variables(obj)
+
+            % Load IDs of data from external file
+            ids = jsondecode(fileread(obj.config.data.ids));
+            % Extract names of variable into struct
+            names = fieldnames(ids.vars_ids);
+
+            % Create variables list
+            vars_string = '\n  <strong>Available variables of VESNA device:</strong>\n (List of available variables to be exchanged with the remote cloud service)\n\n';
+            for i = 1:length(names)
+                vars_string = [vars_string, '    ', names{i}, '\n'];
+            end
+
+            % Return outputs: either return list as a variable or display a list on the screen
+            if (nargout == 1)
+                % Return outputs as a variable (class:cell-array)
+                list_of_variables = names;
+            else
+                % Display variables list on the screen
+                fprintf([vars_string, '\n\n'])
+            end
+        end
+
     end
 end
