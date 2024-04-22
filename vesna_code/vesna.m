@@ -137,7 +137,7 @@ classdef vesna < handle
                 elseif contains(errors.identifier,'400')
                     % Wrong LOGIN (ID) or wrong PASWORD (SECRET)
                     obj.communication.status = "unauthorized";
-                    obj.communication.flag = -1;    
+                    obj.communication.flag = -1;
                     if obj.communication.reconnect == 0
                         error("VESNA: Connection error: Unauthorized access (login failed)!")
                     end
@@ -248,7 +248,7 @@ classdef vesna < handle
         % Example:
         % VESNA.download(["temperature",sampleRate,"2023-11-07 10:00:00","2023-11-07 11:00:00"])
         %
-        % To download all available data simply use: 
+        % To download all available data simply use:
         % VESNA.download()
         function [downloaded_value,obj] = download(obj,varargin)
 
@@ -276,11 +276,11 @@ classdef vesna < handle
                     try
                         obj.communication.options.RequestMethod = "auto";
                         downloaded = webread(strcat(obj.config.cloud.URL2things, ...
-                            ids.thing_id,obj.config.cloud.properties,ids.vars_ids.(names{i})), ...
+                            ids.thing_id,obj.config.cloud.properties,ids.vars_ids.(names{i}).id), ...
                             obj.communication.options);
                         Data.(names{i}).value = downloaded.last_value;
-                        Data.(names{i}).time = datetime(replace(downloaded.value_updated_at(1:end-5),"T"," "), ...
-                                'InputFormat','yyyy-MM-dd HH:mm:ss');
+                        Data.(names{i}).time = datetime(replace(downloaded.value_updated_at(1:19),"T"," "), ...
+                            'InputFormat','yyyy-MM-dd HH:mm:ss');
                         obj.communication.lastUpdate = datetime("now");
                     catch
                         % Check connection
@@ -292,7 +292,7 @@ classdef vesna < handle
             else
                 for i = 1:length(varargin)
                     % Check the number of input arguments
-                    if ~any(length(varargin{i}) == [1,2,4])
+                    if ~any(length([varargin{i}]) == [1,2,4])
                         error("VESNA: Download data: Incorrect number of input arguments (1, 2 or 4 inputs expected)!")
                     end
 
@@ -316,7 +316,7 @@ classdef vesna < handle
                         obj.communication.options.RequestMethod = "auto";
                         url_str = strcat(obj.config.cloud.URL2things, ...
                             ids.thing_id,obj.config.cloud.properties, ...
-                            ids.vars_ids.(varargin{i}(1)));
+                            ids.vars_ids.(varargin{i}(1)).id);
                         if length(varargin{i}) == 2 || length(varargin{i}) == 4
                             url_str = strcat(url_str, ...
                                 obj.config.cloud.timeseries, ...
@@ -340,7 +340,7 @@ classdef vesna < handle
                         downloaded = webread(url_str,obj.communication.options);
                         if length(varargin{i}) == 1
                             Data.(varargin{i}).value = downloaded.last_value;
-                            Data.(varargin{i}).time = datetime(replace(downloaded.value_updated_at(1:end-5),"T"," "), ...
+                            Data.(varargin{i}).time = datetime(replace(downloaded.value_updated_at(1:19),"T"," "), ...
                                 'InputFormat','yyyy-MM-dd HH:mm:ss');
                         else
                             if isempty(downloaded.data)
@@ -425,7 +425,7 @@ classdef vesna < handle
                             obj.communication.options.RequestMethod = "put";
                             webwrite(strcat(obj.config.cloud.URL2things, ...
                                 ids.thing_id,obj.config.cloud.properties, ...
-                                ids.vars_ids.(varargin{i}),obj.config.cloud.publish), ...
+                                ids.vars_ids.(varargin{i}).id,obj.config.cloud.publish), ...
                                 struct('value',varargin{i+1}),obj.communication.options);
                             obj.communication.lastUpdate = datetime("now");
                         catch
@@ -456,7 +456,7 @@ classdef vesna < handle
             % Try connection (by downloading some data from cloud)
             try
                 webread(strcat(obj.config.cloud.URL2things,ids.thing_id, ...
-                    obj.config.cloud.properties,ids.vars_ids.(names{1})), ...
+                    obj.config.cloud.properties,ids.vars_ids.(names{1}).id), ...
                     obj.communication.options).last_value;
 
             catch
@@ -470,7 +470,7 @@ classdef vesna < handle
                 % Check if reconnection works (by downloading some data from cloud)
                 try
                     webread(strcat(obj.config.cloud.URL2things,ids.thing_id, ...
-                        obj.config.cloud.properties,ids.vars_ids.(names{1})), ...
+                        obj.config.cloud.properties,ids.vars_ids.(names{1}).id), ...
                         obj.communication.options).last_value;
 
                 catch error_flag2
@@ -491,19 +491,90 @@ classdef vesna < handle
             names = fieldnames(ids.vars_ids);
 
             % Create variables list
-            vars_string = '\n  <strong>Available variables of VESNA device:</strong>\n (List of available variables to be exchanged with the remote cloud service)\n\n';
+            vars_string = '\n  <strong>Available variables of VESNA device:</strong>\n (List of available variables to be exchanged with the remote cloud service)\n\n  Measurements:\n\n';
+            vars_string2 = '\n  Actuators:\n\n';
             for i = 1:length(names)
-                vars_string = [vars_string, '    ', names{i}, '\n'];
+                if double(string(ids.vars_ids.(names{i}).reset)) == 0
+                    vars_string2 = [vars_string2, '    ', names{i}, '\n'];
+                else
+                    vars_string = [vars_string, '    ', names{i}, '\n'];
+                end
             end
+            vars_string = [vars_string,vars_string2];
 
             % Return outputs: either return list as a variable or display a list on the screen
             if (nargout == 1)
                 % Return outputs as a variable (class:cell-array)
-                list_of_variables = names;
+                list_of_variables.actuators = {};
+                list_of_variables.measurements = {};
+                for i = 1:length(names)
+                    if double(string(ids.vars_ids.(names{i}).reset)) == 0
+                        list_of_variables.actuators{end+1} = names{i};
+                    else
+                        list_of_variables.measurements{end+1} = names{i};
+                    end
+                end
+                % list_of_variables = names;
             else
                 % Display variables list on the screen
                 fprintf([vars_string, '\n\n'])
             end
+        end
+
+        %% Terminate control
+        %
+        % Function TERMINATOR terminates/resets (clears) all values of the actuators on the cloud (sets their value to 0).
+        % Note, reset value equal to "Inf" is considered to be an idicator of a non-actuator variable and, hence, such value is not reset.
+        function [ terminator_flag ] = terminator(obj)
+
+            % Load IDs of data from external file
+            ids = jsondecode(fileread(obj.config.data.ids));
+            % Extract names of variable into struct
+            names = fieldnames(ids.vars_ids);
+
+            try
+                for i = 1:length(names)
+                    if ( double(string(ids.vars_ids.(names{i}).reset)) ~= Inf )
+                        obj.upload(names{i},0);
+                    end
+                end
+
+                for i = 1:length(names)
+                    if ( double(string(ids.vars_ids.(names{i}).reset)) == 0 )
+                        test_terminator = obj.download(string(names{i}));
+
+                        if ( test_terminator.(names{i}).value ~= Inf )
+                            flag = 1;
+                        else
+                            flag = 0;
+                        end
+                    end
+                end
+
+            catch
+                flag = 0;
+
+                % Check/ensure connection
+                obj = reconnect(obj);
+
+                % Re-run terminator
+                terminator(obj);
+            end
+
+            if (nargout == 1)
+                % Return outputs as a variable (class:double)
+                terminator_flag = flag; % Assign output in case it is required
+            else
+                % Display output message on the screen
+                if ( flag == 1 )
+                    fprintf("\nVESNA: All actuators are terminated!\n\n");
+                elseif ( flag == 0 )
+                    fprintf("\nVESNA: Warning! Some actuators were not terminated!\nUse VESNA function DOWNLOAD to inspect!\n");
+                else
+                    fprintf("\nVESNA: Error! Function TERMINATOR returned unexpected flag=%d!\n",flag);
+                end
+            end
+
         end
 
     end
