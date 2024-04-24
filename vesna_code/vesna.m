@@ -48,7 +48,7 @@ classdef vesna < handle
         %
         % Function VER returns current version label of VESNA-CODE.
         function vesna_code_version = ver(obj)
-            vesna_code_version = '2023-11-17';
+            vesna_code_version = '2024-04-24';
             obj.version = vesna_code_version;
         end
 
@@ -532,27 +532,46 @@ classdef vesna < handle
             % Extract names of variable into struct
             names = fieldnames(ids.vars_ids);
 
+            if( nargout == 0 ) % verbose mode
+                fprintf("\nVESNA: Terminator initialized:\n");
+            end
+
             try
+                number_of_actuators = 0;
                 for i = 1:length(names)
-                    if ( double(string(ids.vars_ids.(names{i}).reset)) ~= Inf )
-                        obj.upload(names{i},0);
+                    reset_value{i,1} = double(string(ids.vars_ids.(names{i}).reset));
+                    if ( reset_value{i} ~= Inf )
+                        obj.upload(names{i}, reset_value{i});
+                        number_of_actuators = number_of_actuators + 1;
                     end
                 end
 
                 for i = 1:length(names)
-                    if ( double(string(ids.vars_ids.(names{i}).reset)) == 0 )
+                    reset_value{i,1} = double(string(ids.vars_ids.(names{i}).reset));
+                    if ( reset_value{i} ~= Inf )
                         test_terminator = obj.download(string(names{i}));
 
-                        if ( test_terminator.(names{i}).value ~= Inf )
-                            flag = 1;
+                        if ( test_terminator.(names{i}).value == reset_value{i} )
+                            flag(i) = 1; % Correct reset
+
+                            if( nargout == 0 ) % verbose mode
+                                fprintf(" - correctly reset value of ""%s"": %.2f (%s)\n", names{i}, reset_value{i}, obj.communication.lastUpdate);
+                            end
+
                         else
-                            flag = 0;
+                            flag(i) = 0; % Reset failed!
+
+                            if( nargout == 0 ) % verbose mode
+                                fprintf(" ! WARNING: detected the non-reset value of ""%s"": %.2f [expected: %.2f] (%s)\n", names{i}, test_terminator.(names{i}).value, reset_value{i}, obj.communication.lastUpdate);
+                            end
+
                         end
+
                     end
                 end
 
             catch
-                flag = 0;
+                flag(i) = 0;
 
                 % Check/ensure connection
                 obj = reconnect(obj);
@@ -561,17 +580,21 @@ classdef vesna < handle
                 terminator(obj);
             end
 
-            if (nargout == 1)
+            if (nargout == 1) % Assign output in case it is required
                 % Return outputs as a variable (class:double)
-                terminator_flag = flag; % Assign output in case it is required
+                if ( sum(flag) == number_of_actuators )
+                    terminator_flag = 1 ;
+                else
+                    terminator_flag = 0 ; 
+                end
             else
                 % Display output message on the screen
-                if ( flag == 1 )
+                if ( sum(flag) == number_of_actuators )
                     fprintf("\nVESNA: All actuators are terminated!\n\n");
-                elseif ( flag == 0 )
-                    fprintf("\nVESNA: Warning! Some actuators were not terminated!\nUse VESNA function DOWNLOAD to inspect!\n");
+                elseif ( sum(flag) < number_of_actuators ) & ( sum(flag) > 0 )
+                    fprintf("\nVESNA: Warning! %d problem(s) detected! \nSome actuators were not terminated!\nUse VESNA function DOWNLOAD to inspect!\n", ( number_of_actuators - sum(flag) ) );
                 else
-                    fprintf("\nVESNA: Error! Function TERMINATOR returned unexpected flag=%d!\n",flag);
+                    fprintf("\nVESNA: Error! Function TERMINATOR returned unexpected FLAG=%d!\n",flag);
                 end
             end
 
