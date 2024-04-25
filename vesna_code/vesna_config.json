@@ -11,7 +11,8 @@
         },
         "data": {
             "creds": "vesna_email.json",
-            "ids": "vesna_data_ids.json"
+            "ids": "vesna_data_ids.json",
+            "resetValueMeassurements": Inf
         }
     },
     "communication": {

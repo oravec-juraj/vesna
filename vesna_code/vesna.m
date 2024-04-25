@@ -48,7 +48,7 @@ classdef vesna < handle
         %
         % Function VER returns current version label of VESNA-CODE.
         function vesna_code_version = ver(obj)
-            vesna_code_version = '2023-11-17';
+            vesna_code_version = '2024-04-24';
             obj.version = vesna_code_version;
         end
 
@@ -485,38 +485,43 @@ classdef vesna < handle
         % Function VARIABLES returns list of variables to be exchanged with the remote cloud service.
         function [list_of_variables] = variables(obj)
 
+            resetValueMeassurements = obj.config.data.resetValueMeassurements;
+
             % Load IDs of data from external file
             ids = jsondecode(fileread(obj.config.data.ids));
             % Extract names of variable into struct
             names = fieldnames(ids.vars_ids);
 
             % Create variables list
-            vars_string = '\n  <strong>Available variables of VESNA device:</strong>\n (List of available variables to be exchanged with the remote cloud service)\n\n  Measurements:\n\n';
-            vars_string2 = '\n  Actuators:\n\n';
-            for i = 1:length(names)
-                if double(string(ids.vars_ids.(names{i}).reset)) == 0
-                    vars_string2 = [vars_string2, '    ', names{i}, '\n'];
+            vars_string_intro = '\n <strong>Available variables of VESNA device:</strong>\n (List of available variables to be exchanged with the remote cloud service)\n';
+            vars_string_read_only = '\n Measurements:\n\n';
+            vars_string_read_write = '\n Actuators:\n\n';
+            for i = 1 : length(names)
+                resetValue{i,1} = double(string(ids.vars_ids.(names{i}).reset));
+                if ( resetValue{i} == Inf )
+                    vars_string_read_only = [vars_string_read_only, '\t', names{i}, '\n']; % measurements
                 else
-                    vars_string = [vars_string, '    ', names{i}, '\n'];
+                    vars_string_read_write = [vars_string_read_write, '\t', names{i}, '\n']; % actuators
                 end
             end
-            vars_string = [vars_string,vars_string2];
+            vars_string = [vars_string_intro, vars_string_read_only, vars_string_read_write ];
 
             % Return outputs: either return list as a variable or display a list on the screen
             if (nargout == 1)
                 % Return outputs as a variable (class:cell-array)
-                list_of_variables.actuators = {};
                 list_of_variables.measurements = {};
+                list_of_variables.actuators = {};
+                list_of_variables.actuatorsResetValues = {};
                 for i = 1:length(names)
-                    if double(string(ids.vars_ids.(names{i}).reset)) == 0
-                        list_of_variables.actuators{end+1} = names{i};
-                    else
+                    if ( resetValue{i} == Inf )
                         list_of_variables.measurements{end+1} = names{i};
+                    else
+                        list_of_variables.actuators{end+1} = names{i};
+                        list_of_variables.actuatorsResetValues{end+1} = double(string(ids.vars_ids.(names{i}).reset));
                     end
                 end
-                % list_of_variables = names;
             else
-                % Display variables list on the screen
+                % Display list of variables on the screen
                 fprintf([vars_string, '\n\n'])
             end
         end
@@ -526,33 +531,45 @@ classdef vesna < handle
         % Function TERMINATOR terminates/resets (clears) all values of the actuators on the cloud (sets their value to 0).
         % Note, reset value equal to "Inf" is considered to be an idicator of a non-actuator variable and, hence, such value is not reset.
         function [ terminator_flag ] = terminator(obj)
+            
+            listVariables = variables(obj); % Generate list of variables
+            numberActuators = length( listVariables.actuators ); % Extract number of actuators 
 
-            % Load IDs of data from external file
-            ids = jsondecode(fileread(obj.config.data.ids));
-            % Extract names of variable into struct
-            names = fieldnames(ids.vars_ids);
+            if( nargout == 0 ) % verbose mode
+                fprintf("\nVESNA: Terminator initialized:\n");
+            end
 
             try
-                for i = 1:length(names)
-                    if ( double(string(ids.vars_ids.(names{i}).reset)) ~= Inf )
-                        obj.upload(names{i},0);
-                    end
+                
+                % Upload RESET values to cloud
+                for i = 1 : numberActuators
+                    obj.upload( string(listVariables.actuators{i}), listVariables.actuatorsResetValues{i} );
                 end
 
-                for i = 1:length(names)
-                    if ( double(string(ids.vars_ids.(names{i}).reset)) == 0 )
-                        test_terminator = obj.download(string(names{i}));
+                % Verify RESET by downolading current values of actuators from cloud
+                for i = 1 : numberActuators
+                    % Download current values of actuators 
+                    test_terminator = obj.download( string( listVariables.actuators{i} ) );
+                    % Verify the RESET values
+                    if ( test_terminator.(string(listVariables.actuators{i})).value == listVariables.actuatorsResetValues{i} )
+                        flag(i) = 1; % Correct reset
 
-                        if ( test_terminator.(names{i}).value ~= Inf )
-                            flag = 1;
-                        else
-                            flag = 0;
+                        if( nargout == 0 ) % verbose mode
+                            fprintf(" - correctly reset value of ""%s"": %.2f (%s)\n", listVariables.actuators{i}, listVariables.actuatorsResetValues{i}, obj.communication.lastUpdate);
                         end
+
+                    else
+                        flag(i) = 0; % Reset failed!
+
+                        if( nargout == 0 ) % verbose mode
+                            fprintf(" ! WARNING: detected the non-reset value of ""%s"": %.2f [expected: %.2f] (%s)\n", listVariables.actuators{i}, test_terminator.(names{i}).value, listVariables.actuatorsResetValues{i}, obj.communication.lastUpdate);
+                        end
+
                     end
                 end
 
             catch
-                flag = 0;
+                flag(i) = 0;
 
                 % Check/ensure connection
                 obj = reconnect(obj);
@@ -561,17 +578,21 @@ classdef vesna < handle
                 terminator(obj);
             end
 
-            if (nargout == 1)
+            if (nargout == 1) % Assign output in case it is required
                 % Return outputs as a variable (class:double)
-                terminator_flag = flag; % Assign output in case it is required
+                if ( sum(flag) == numberActuators )
+                    terminator_flag = 1 ;
+                else
+                    terminator_flag = 0 ;
+                end
             else
                 % Display output message on the screen
-                if ( flag == 1 )
+                if ( sum(flag) == numberActuators )
                     fprintf("\nVESNA: All actuators are terminated!\n\n");
-                elseif ( flag == 0 )
-                    fprintf("\nVESNA: Warning! Some actuators were not terminated!\nUse VESNA function DOWNLOAD to inspect!\n");
+                elseif ( sum(flag) < numberActuators ) & ( sum(flag) > 0 )
+                    fprintf("\nVESNA: Warning! %d problem(s) detected! \nSome actuators were not terminated!\nUse VESNA function DOWNLOAD to inspect!\n", ( numberActuators - sum(flag) ) );
                 else
-                    fprintf("\nVESNA: Error! Function TERMINATOR returned unexpected flag=%d!\n",flag);
+                    fprintf("\nVESNA: Error! Function TERMINATOR returned unexpected FLAG=%d!\n",flag);
                 end
             end
 
