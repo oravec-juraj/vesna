@@ -1,0 +1,40 @@
+1.	Integrate a user login (credentials) to assign the access rights subject to hierarchy: guest/admin user [30 points]
+•	Spojiť sa s pánom Č. a zistiť ako je možné pridávať veci na stránku
+•	V akom programe chceme stránku robiť?
+o	Create a website – PHP, Laravel 
+o	 Upload it to the domain – pán Č.
+o	 Set login admin/user and assign the rights
+2.	Show current values and evolution graph of data from sensors in the web environment (for guest user) [10 points]
+•	V akom formáte budú dodávané údaje na zobrazenie na stránke?
+•	Pokiaľ máme odosielať zo stránky údaje, v akom formáte a ako?
+•	V čom a ako vytvoriť aktuálne grafy?
+•	Dorábanie na základe novo pribudnutých senzorov od Core teamu
+o	Collaboration with Core team – Arduino Cloud – 2. polka semestra
+o	 API – data exchange 
+o	 Live updating of graphs 
+3.	Enable remote control actions for admin users to override the autonomous control (cooperation with SmartTeam) [10 points]
+•	Počkať na úpravu kódu od Smart teamu, poprípade zistiť v akom stave je regulátor atď.
+o	Collaboration with Smart team – Process control – flagy riadenie/manuál
+o	 Create virtual remote controller 
+4.	Implement a live webcam for guest users [25 points]
+•	Ako zapojiť kameru? – Arduino – potreba napísať kód 
+•	Ako získavať údaje? V akom stave ich kamera vyhodnotí/ ponechá na karte?
+o	installation of the camera
+o	 connection to esp32 – webserver 
+o	 Broadcasting 
+5.	Show time-lapse for admin user [20 points]
+•	Ukladať snímky v určitej perióde, potom vyhotoviť video?
+o	set up periodic photographing – hour  
+o	 upload data to the cloud 
+o	 API – data exchange 
+o	 Enable time-lapse view
+6.	Elaborate documentation for each task [5 points]
+•	Niečo rozumné spísať
+
+
+
+1.	Urobiť základnú úvodnú stránku, na ktorú budeme dohadzovať veci + login
+2.	Spracovať údaje do takej formy, aby boli zobrazovateľné na stránke (podľa toho v akom prostredí)  databázy - grafy
+3.	Vymyslieť akou slučkou spraviť neprepisovanie kódu + zobrazenie riadenia (tlačidlá na zapnutie ohrevu atď..)
+4.	Pohrať sa s kamerou a nainštalovať ju, napísať k nej kód
+5.	Prepraviť údaje z kamery na stránku a vytvoriť časozber

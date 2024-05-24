@@ -1,0 +1,138 @@
+{
+"Control variables": {
+    "e_k1": {
+        "Value": 0,
+        "Description": "Control error in k-1 period"},
+    "e_k2": {
+        "Value": 0,
+        "Description": "Control error in k-1 period"},
+    "u_k1": {
+        "Value": 0,
+        "Description": "Control input in k-1 period"}
+    },
+"Access data": {
+    "hierarchy": {
+        "Value": 0,
+        "Description": "Automatic/manual control switch"}
+    },
+"Temperature controller constants": {
+    "t_i": {
+        "Value": 6,
+        "Description": "Time constant"},
+    "t_d": {
+        "Value": 0,
+        "Description": "Delay time constant"},
+    "z_r": {
+        "Value": 45,
+        "Description": "Gain constant"}
+    },
+"Daytime mode": {
+    "time_down": {
+        "Value": 21600,
+        "Description": "Day start (in seconds)"},
+    "time_up": {
+        "Value": 72000,
+        "Description": "Day end (in seconds)"}
+    },
+"Lighting": {
+    "light_int": {
+        "Value": 1500,
+        "Description": "Minimum required light intensity"},
+    "light_off": {
+        "Value": 0,
+        "Description": "Light is off"},
+    "light_on": {
+        "Value": 255,
+        "Description": "Light is on"}
+    },
+"Temperature": {
+    "t_max": {
+        "Value": 31,
+        "Description": "Maximum admissible temperature"},
+    "w_day": {
+        "Value": 26,
+        "Description": "Daytime temperature setpoint"},
+    "w_night": {
+        "Value": 18,
+        "Description": "Night-time temperature setpoint"}
+    },
+"Fan": {
+    "fan_off": {
+        "Value": 0,
+        "Description": "Fan is off"},
+    "fan_on": {
+        "Value": 255,
+        "Description": "Fan is off"}
+    },
+"Humidity": {
+    "h_max": {
+        "Value": 52,
+        "Description": "Maximum required humidity"},
+    "h_min": {
+        "Value": 48,
+        "Description": "Minimum required humidity"},
+    "hum_off": {
+        "Value": 0,
+        "Description": "Pump is on"},
+    "hum_on": {
+        "Value": 255,
+        "Description": "Pump is off"},
+    "plant_id": {
+        "Value": 0,
+        "Description": "User settup irrigation"}
+    },
+"Time period data": {
+    "samp": {
+        "Value": 60,
+        "Description": "Sampling (data loading) period (in seconds)"},
+    "vent_dur": {
+        "Value": 900,
+        "Description": "Ventilation duration (in seconds)"},
+    "vent_start": {
+        "Value": 7200,
+        "Description": "Ventilation period (in seconds)"}
+    },
+"Control input": {
+    "fan_S": {
+        "Value": 0,
+        "Description": "Fan control input"},
+    "hum_S": {
+        "Value": 0,
+        "Description": "Humidiser control input"},
+    "light_S": {
+        "Value": 0,
+        "Description": "Light control input"},
+    "temp_S": {
+        "Value": 0,
+        "Description": "Heater control input"},
+    "irr_S": {
+        "Value": 0,
+        "Description": "Irrigator control input"}
+    },
+"Measured data": {
+    "door_val": {
+        "Value": 0,
+        "Description": "Door position"},
+    "doorNN": {
+        "Value": 0,
+        "Description": "Door position - neural network"},
+    "light_val": {
+        "Value": 1000,
+        "Description": "Light intensity"},
+    "HUM_bme": {
+        "Value": 50,
+        "Description": "Top greenhouse temperature"},
+    "HUM_dht": {
+        "Value": 50,
+        "Description": "Bottom greenhouse temperature"},
+    "T_top": {
+        "Value": 25,
+        "Description": "BMME humidity"},
+    "T_bot": {
+        "Value": 25,
+        "Description": "DHT humidity"},
+    "soil_hum": {
+        "Value": 50,
+        "Description": "Soil humidity"}
+    }
+}

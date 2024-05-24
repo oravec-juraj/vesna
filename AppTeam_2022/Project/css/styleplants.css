@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.sliders {
+  font-family: "Roboto", sans-serif;
+}
+.column {
+  float: left;
+  width: 33.33%;
+  text-align: center;
+  column-gap: 40px;
+}
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.plant {
+  padding: auto;
+  padding-top: 0.5cm;
+}
+
+.title {
+  text-align: center;
+  text-shadow: 00.5cm;
+  background-color: #b8b5b5;
+}
